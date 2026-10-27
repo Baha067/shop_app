@@ -7,6 +7,10 @@ def add_item(conn, order_id, product_id, quantity):
         )
         if cur.rowcount == 0:
             raise ValueError(f"Product {product_id} does not exist")
+        cur.execute(
+            "UPDATE products SET stock = stock - %s WHERE id = %s;",
+            (quantity, product_id)
+        )
 def place_order(conn, customer_id, items):
     order_id = create_order(conn, customer_id)
     for product_id, quantity in items:
