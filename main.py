@@ -13,7 +13,6 @@ except errors.CheckViolation as error:
 except ValueError as error:
     conn.rollback()
     print("Order cancelled:", error)
-    conn.commit()
 finally:
     conn.close()
 

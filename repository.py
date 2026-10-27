@@ -25,3 +25,8 @@ def create_order(conn, customer_id):
         )
         return cur.fetchone()[0]
         
+def get_sales_report(conn):
+    with conn.cursor() as cur:
+        cur.execute("SELECT name, size, pairs_sold, revenue FROM sales_report ORDER BY name, size;")
+        return cur.fetchall()
+        
